@@ -14,7 +14,7 @@ class PageController extends Controller
                     case 'home':
                         $this->home();
                         break;
-                    case 'about':  // Ajout du case pour about
+                    case 'about':  
                         $this->about();
                         break;
                     default:

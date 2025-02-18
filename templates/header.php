@@ -29,10 +29,10 @@ use App\Tools\NavigationTools;
                     <a href="index.php" class="nav-link px-2 <?= NavigationTools::addActiveClass('page', 'home') ?>">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.php?controller=book&action=list" class="nav-link px-2 <?= NavigationTools::addActiveClass('book', 'list') ?>">Livres</a>
-                <li class="nav-item">
                     <a href="index.php?controller=page&action=about" class="nav-link px-2 <?= NavigationTools::addActiveClass('page', 'about') ?>">À propos</a>
                 </li>
+                <li class= "nav-item">
+                    <a href = "index.php?controller=article&action=list" class= "nav-link px-2 <?= NavigationTools::addActiveClass('article', 'list') ?>">Articles</a>
             </ul>
 
             <div class="col-md-3 text-end">
