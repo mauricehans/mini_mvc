@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 
 class ArticleController extends Controller
 {
@@ -17,12 +18,12 @@ class ArticleController extends Controller
                         $this->show();
                         break;
                     default:
-                        throw new \Exception("Cette action n'existe pas : ".$_GET['action']);
+                        throw new \Exception("Cette action n'existe pas : " . $_GET['action']);
                 }
             } else {
                 throw new \Exception("Aucune action détectée");
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->render('errors/default', [
                 'error' => $e->getMessage()
             ]);
@@ -33,7 +34,7 @@ class ArticleController extends Controller
     {
         $repository = new ArticleRepository();
         $articles = $repository->findAll();
-        
+
         $this->render('article/list', [
             'articles' => $articles
         ]);
@@ -44,16 +45,21 @@ class ArticleController extends Controller
         if (!isset($_GET['id'])) {
             throw new \Exception("L'id est manquant");
         }
-        
+
         $repository = new ArticleRepository();
         $article = $repository->findOneById($_GET['id']);
-        
+
         if (!$article) {
             throw new \Exception("L'article n'existe pas");
         }
         
+        // Récupération des commentaires associés à cet article
+        $commentRepository = new CommentRepository();
+        $comments = $commentRepository->findByArticleId($article->getId());
+
         $this->render('article/show', [
-            'article' => $article
+            'article'  => $article,
+            'comments' => $comments
         ]);
     }
 }
