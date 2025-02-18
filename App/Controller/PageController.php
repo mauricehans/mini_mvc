@@ -12,8 +12,10 @@ class PageController extends Controller
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
                     case 'home':
-                        //charger controleur home
                         $this->home();
+                        break;
+                    case 'about':  // Ajout du case pour about
+                        $this->about();
                         break;
                     default:
                         throw new \Exception("Cette action n'existe pas : ".$_GET['action']);
@@ -27,20 +29,20 @@ class PageController extends Controller
                 'error' => $e->getMessage()
             ]);
         }
-
     }
 
-    /*
-    Exemple d'appel depuis l'url
-        ?controller=page&action=home
-    */
     protected function home()
     {
-
         $this->render('page/home', [
             'test' => 555
         ]);
-
     }
 
+    // Ajout de la méthode about
+    protected function about()
+    {
+        $this->render('page/about', [
+            'about' => 'Bienvenue sur la page À propos'
+        ]);
+    }
 }
